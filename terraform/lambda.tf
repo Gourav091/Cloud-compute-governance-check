@@ -5,4 +5,9 @@ resource "aws_lambda_function" "input_validation_lambda" {
     role = aws_iam_role.lambda_role.arn
     timeout = 300  #5mins
     memory_size = 512
+
+    vpc_config {
+    subnet_ids = [aws_subnet.private_subnet.id]
+    security_group_ids = [aws_security_group.lambda_sg.id]
+    }
 }
